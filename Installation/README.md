@@ -30,14 +30,14 @@ If you need CUDA:
 1. To this day, thrust, a library used by CUDA, can't be compiled with Clang and `libc++`, so that libraries that use CUDA (OpenCV, libfreenect2, Kangaroo) must be compiled either with Clang and `libstdc++` or GCC.
 2. Kangaroo requires a CUDA version <= 6.5.
 3. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
-4. The compiler used by default is `/usr/bin/cc` and `/usr/bin/c++, which are links to the real compiler binaries. You can modify them to change the default compiler of the system. To check the compiler version, you can do:
+4. The compiler used by default is `/usr/bin/cc` and `/usr/bin/c++`, which are links to the real compiler binaries. You can modify them to change the default compiler of the system. To check the compiler version, you can do:
 
         $ cc --version
         $ c++ --version
 
 5. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
 
-  Clang with libstdc++:
+  Clang with `libstdc++`:
   * `CMAKE_CXX_COMPILER=/usr/bin/cc`
   * `CMAKE_CXX_FLAGS=-stdlib=libstdc++`
   * `CMAKE_C_COMPILER=/usr/bin/c++`
@@ -85,7 +85,7 @@ CUDA <= 6.5 is required by Kangaroo and libfreenect2, and you may also use it fo
 
 #### Eigen
 
-1. Get and install Eigen from http://eigen.tuxfamily.org/index.php?title=Main_Page
+1. Get and install Eigen from http://eigen.tuxfamily.org/index.php?title=Main_Page.
 
 #### GFlags
 
@@ -103,6 +103,7 @@ CUDA <= 6.5 is required by Kangaroo and libfreenect2, and you may also use it fo
 
 1. Get and install Ceres Solver from http://ceres-solver.org/.
 2. If you get any error similar to this:
+
         ceres-solver/examples/libmv_bundle_adjuster.cc:300:58: error: 'read' was not declared in this scope
         CHECK_GT(read(file_descriptor_, &value, sizeof(value)), 0);
 
@@ -146,26 +147,33 @@ You will have to add the `export` instruction before executing any program that 
 1. Get an install OpenCV from http://opencv.org/downloads.html.
 2. Make sure variable `CUDA_HOST_COMPILER` is set either to gcc-4.6 or clang (and not just gcc or cc).
 3. If OpenCV version is 2.4.9 and you get this error
+
         ld: warning: directory not found for option '-L-Wl,/usr/local/cuda'
         ld: can't map file, errno=22 file '/usr/local/cuda' for architecture x86_64
-go to `opencv/cmake/FindCUDA.cmake` and change line
+        
+  go to `opencv/cmake/FindCUDA.cmake` and change line
+
         list(APPEND CUDA_LIBRARIES -Wl,-rpath "-Wl,${_cuda_path_to_cudart}"
-for
+        
+  for
+
         list(APPEND CUDA_LIBRARIES -Wl,-rpath "${_cuda_path_to_cudart}".
+        
   You may need to do the same in the system CMake modules, for example in `/usr/local/share/cmake-3.0/Modules/FindCUDA.cmake`. See [additional information](
 http://answers.opencv.org/question/33972/problems-with-249-and-os-x-1085/)
 
-4. There is a known bug in OpenCV 2.4.9 when compiled with Cuda 6.5. If you get this error:
-       opencv-2.4.9/modules/gpu/src/nvidia/core/NCVPixelOperations.hpp(51): error: a storage class is not allowed in an explicit specialization
+4. There is a known bug in OpenCV 2.4.9 when compiled with CUDA 6.5. If you get this error:
+
+        opencv-2.4.9/modules/gpu/src/nvidia/core/NCVPixelOperations.hpp(51): error: a storage class is not allowed in an explicit specialization
 
   try replacing file [NCVPixelOperations.hpp](
-http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11054b66863e1e9f753141)  in OpenCV.
+http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11054b66863e1e9f753141) in OpenCV.
 
-5. The default OpenCV `highgui` module uses Cocoa as rendering framework by default. This module uses Objective C++ 2 syntax that are not supported by gcc <= 4.8, causing errors as these:
+5. The default OpenCV `highgui` module uses Cocoa as rendering framework by default. This module uses Objective C++ 2 syntax that is not supported by gcc <= 4.8, causing errors as these:
 
         [ 20%] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/window_cocoa.mm.o
         opencv-2.4.9/modules/highgui/src/window_cocoa.mm: In function 'void cvDestroyAllWindows()':
-       opencv-2.4.9/modules/highgui/src/window_cocoa.mm:200:23: error: expected ';' before 'in'
+        opencv-2.4.9/modules/highgui/src/window_cocoa.mm:200:23: error: expected ';' before 'in'
         for(NSString *key in list) {
 
   Similar problems occur even using alternatives Carbon or Qt. To solve this, you have to use Clang with `-stdlib=libstdc++`, or to disable the highgui module.
@@ -205,6 +213,7 @@ Install this library if you require support for Kinect2.
 2. Follow compilation instructions in that website (install and compile dependencies).
 3. Go to `examples/protonect`, build with `cmake` and `make install`. Some versions of Clang (Apple LLVM < 6) cannot compile this library because either the STL thread library cannot be used with `libstdc++` or because they don't recognize the keyword `thread_local`. If you have any of these errors, use GCC or a more recent version of Clang.
 4. If you are compiling with CUDA and get this error
+
         ld: warning: directory not found for option '-L-Wl,/usr/local/cuda'
         ld: can't map file, errno=22 file '/usr/local/cuda' for architecture x86_64
 
@@ -226,10 +235,11 @@ Install this library if you require support for Kinect2.
 3. Make sure you set variable `CUDA_HOST_COMPILER` as desired.
 4. Make and `make install` (with `sudo` if required).
 5. If you get an error that looks like this:
+
         In file included from /usr/local/cuda/include/thrust/iterator/iterator_traits.h:75:
-       /usr/local/cuda/include/thrust/iterator/detail/iterator_traits.inl:60:53:
+        /usr/local/cuda/include/thrust/iterator/detail/iterator_traits.inl:60:53:
         error: no type named 'iterator_category' in 'thrust::iterator_traits<thrust::device_ptr<void> >' typename thrust::iterator_traits<Iterator>::iterator_category
-make sure you got the latest version of the thrust library from https://github.com/thrust/thrust and copy its headers to `/usr/local/cuda/include/thrust`.
+  make sure you got the latest version of the thrust library from https://github.com/thrust/thrust and copy its headers to `/usr/local/cuda/include/thrust`.
 
 #### Vicalib
 1. Get Vicalib from https://github.com/arpg/vicalib
