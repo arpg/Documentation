@@ -160,7 +160,7 @@ You will have to add the `export` instruction before executing any program that 
         list(APPEND CUDA_LIBRARIES -Wl,-rpath "${_cuda_path_to_cudart}".
         
   You may need to do the same in the system CMake modules, for example in `/usr/local/share/cmake-3.0/Modules/FindCUDA.cmake`. See [additional information](
-http://answers.opencv.org/question/33972/problems-with-249-and-os-x-1085/)
+http://answers.opencv.org/question/33972/problems-with-249-and-os-x-1085/).
 
 4. There is a known bug in OpenCV 2.4.9 when compiled with CUDA 6.5. If you get this error:
 
