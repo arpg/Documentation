@@ -101,10 +101,11 @@ CUDA <= 6.5 is required by Kangaroo and libfreenect2, and you may also use it fo
 
 #### Ceres Solver
 
-1. Get and install Ceres Solver from http://ceres-solver.org/
+1. Get and install Ceres Solver from http://ceres-solver.org/.
 2. If you get any error similar to this:
         ceres-solver/examples/libmv_bundle_adjuster.cc:300:58: error: 'read' was not declared in this scope
         CHECK_GT(read(file_descriptor_, &value, sizeof(value)), 0);
+
   open file `ceres-solver/examples/libmv_bundle_adjuster.cc` and add `# include <unistd.h>` to line 103:
 
        #ifdef _MSC_VER
