@@ -17,6 +17,7 @@ This guide describes how to install the ARPG software used for calibration and 3
 ### Clang vs GCC
 
 You can use either Clang or GCC as C/C++ compilers. As general advice, use GCC if you need CUDA (e.g. for Kangaroo), and Clang otherwise. You must take this notes into account before choosing one:
+
 1. You can't mix libraries compiled by different compilers unless you make they use the same standard library implementation.
 2. GCC uses `libstdc++` and Clang `libc++` (it used `stdlibc++` before Mac OS X 10.9, see [additional information](http://stackoverflow.com/questions/19774778/when-is-it-necessary-to-use-use-the-flag-stdlib-libstdc)).
 3. Clang can use `stdlibc++` by using the flag `-stdlib=libstdc++`. However, the `libstdc++` version shipped by Clang is 6.0.9, which corresponds to GCC 4.2.1 ([list of versions of GCC and stdlibc++](https://gcc.gnu.org/onlinedocs/libstdc++/manual/abi.html)). This version is old and does not have full support for C++11 (see [additional information](http://stackoverflow.com/questions/26447231/clang-does-not-recognize-stdshared-ptr-with-libstdc)).
@@ -25,6 +26,7 @@ You can use either Clang or GCC as C/C++ compilers. As general advice, use GCC i
 
 ### Using CUDA
 If you need CUDA:
+
 1. To this day, thrust, a library used by CUDA, can't be compiled with Clang and `libc++`, so that libraries that use CUDA (OpenCV, libfreenect2, Kangaroo) must be compiled either with Clang and `libstdc++` or GCC.
 2. Kangaroo requires a CUDA version <= 6.5.
 3. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
@@ -73,7 +75,7 @@ The usual way to build a library or application that supports CMake (contains a 
 ### ARPG dependencies
 
 #### CUDA
-CUDA is required by Kangaroo and libfreenect2, and you may also use it for OpenCV.
+CUDA <= 6.5 is required by Kangaroo and libfreenect2, and you may also use it for OpenCV.
 
 1. Install CUDA for nVidia graphic cards from https://developer.nvidia.com/cuda-downloads?sid=625109.
 2. Get the latest thrust library from https://github.com/thrust/thrust and copy the thrust directory to `/usr/local/cuda/include`.
@@ -95,14 +97,14 @@ CUDA is required by Kangaroo and libfreenect2, and you may also use it for OpenC
 1. Get and install Glog from https://code.google.com/p/google-glog/.
 2. Set environment variable `GLOG_logtostderr=1`. For example, in `~/.bash_profile`:
 
-       export GLOG_logtostderr=1
+        export GLOG_logtostderr=1
 
 #### Ceres Solver
 
 1. Get and install Ceres Solver from http://ceres-solver.org/
 2. If you get any error similar to this:
-       ceres-solver/examples/libmv_bundle_adjuster.cc:300:58: error: 'read' was not declared in this scope
-       CHECK_GT(read(file_descriptor_, &value, sizeof(value)), 0);
+        ceres-solver/examples/libmv_bundle_adjuster.cc:300:58: error: 'read' was not declared in this scope
+        CHECK_GT(read(file_descriptor_, &value, sizeof(value)), 0);
   open file `ceres-solver/examples/libmv_bundle_adjuster.cc` and add `# include <unistd.h>` to line 103:
 
        #ifdef _MSC_VER
@@ -125,10 +127,10 @@ CUDA is required by Kangaroo and libfreenect2, and you may also use it for OpenC
 1. Get and install Protocol Buffers from https://github.com/google/protobuf/.
 2. If you use GCC and get a linking error as this one:
 
-       dyld: Symbol not found: __ZNSt3tr18__detail12__prime_listE
-       Referenced from: protobuf/src/.libs/libprotobuf.9.dylib
-       Expected in: /usr/lib/libstdc++.6.dylib
-       in protobuf/src/.libs/libprotobuf.9.dylib
+        dyld: Symbol not found: __ZNSt3tr18__detail12__prime_listE
+        Referenced from: protobuf/src/.libs/libprotobuf.9.dylib
+        Expected in: /usr/lib/libstdc++.6.dylib
+        in protobuf/src/.libs/libprotobuf.9.dylib
 
   Make sure you are not using an old `libstdc++` (e.g. libstdc++.6.0.9 provided by Clang by default). A fast trick to use a newer version is to add to `DYLD_LIBRARY_PATH` the path to the newer `libstdc++`. For example, for gcc 4.8.2 installed by Homebrew:
 
@@ -143,13 +145,13 @@ You will have to add the `export` instruction before executing any program that 
 1. Get an install OpenCV from http://opencv.org/downloads.html.
 2. Make sure variable `CUDA_HOST_COMPILER` is set either to gcc-4.6 or clang (and not just gcc or cc).
 3. If OpenCV version is 2.4.9 and you get this error
-       ld: warning: directory not found for option '-L-Wl,/usr/local/cuda'
-       ld: can't map file, errno=22 file '/usr/local/cuda' for architecture x86_64
+        ld: warning: directory not found for option '-L-Wl,/usr/local/cuda'
+        ld: can't map file, errno=22 file '/usr/local/cuda' for architecture x86_64
 go to `opencv/cmake/FindCUDA.cmake` and change line
-`list(APPEND CUDA_LIBRARIES -Wl,-rpath "-Wl,${_cuda_path_to_cudart}"`
+        list(APPEND CUDA_LIBRARIES -Wl,-rpath "-Wl,${_cuda_path_to_cudart}"
 for
-`list(APPEND CUDA_LIBRARIES -Wl,-rpath "${_cuda_path_to_cudart}"`.
-You may need to do the same in the system CMake modules, for example in `/usr/local/share/cmake-3.0/Modules/FindCUDA.cmake`. See [additional information](
+        list(APPEND CUDA_LIBRARIES -Wl,-rpath "${_cuda_path_to_cudart}".
+  You may need to do the same in the system CMake modules, for example in `/usr/local/share/cmake-3.0/Modules/FindCUDA.cmake`. See [additional information](
 http://answers.opencv.org/question/33972/problems-with-249-and-os-x-1085/)
 
 4. There is a known bug in OpenCV 2.4.9 when compiled with Cuda 6.5. If you get this error:
@@ -160,10 +162,10 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
 
 5. The default OpenCV `highgui` module uses Cocoa as rendering framework by default. This module uses Objective C++ 2 syntax that are not supported by gcc <= 4.8, causing errors as these:
 
-       [ 20%] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/window_cocoa.mm.o
-       opencv-2.4.9/modules/highgui/src/window_cocoa.mm: In function 'void cvDestroyAllWindows()':
+        [ 20%] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/window_cocoa.mm.o
+        opencv-2.4.9/modules/highgui/src/window_cocoa.mm: In function 'void cvDestroyAllWindows()':
        opencv-2.4.9/modules/highgui/src/window_cocoa.mm:200:23: error: expected ';' before 'in'
-       for(NSString *key in list) {
+        for(NSString *key in list) {
 
   Similar problems occur even using alternatives Carbon or Qt. To solve this, you have to use Clang with `-stdlib=libstdc++`, or to disable the highgui module.
 
@@ -197,12 +199,13 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
 
 #### libfreenect2
 Install this library if you require support for Kinect2.
+
 1. Get libfreenect2 from https://github.com/dorian3d/libfreenect2.
 2. Follow compilation instructions in that website (install and compile dependencies).
 3. Go to `examples/protonect`, build with `cmake` and `make install`. Some versions of Clang (Apple LLVM < 6) cannot compile this library because either the STL thread library cannot be used with `libstdc++` or because they don't recognize the keyword `thread_local`. If you have any of these errors, use GCC or a more recent version of Clang.
 4. If you are compiling with CUDA and get this error
-       ld: warning: directory not found for option '-L-Wl,/usr/local/cuda'
-       ld: can't map file, errno=22 file '/usr/local/cuda' for architecture x86_64
+        ld: warning: directory not found for option '-L-Wl,/usr/local/cuda'
+        ld: can't map file, errno=22 file '/usr/local/cuda' for architecture x86_64
 
   see the notes about installing OpenCV above.
 
@@ -222,9 +225,9 @@ Install this library if you require support for Kinect2.
 3. Make sure you set variable `CUDA_HOST_COMPILER` as desired.
 4. Make and `make install` (with `sudo` if required).
 5. If you get an error that looks like this:
-       In file included from /usr/local/cuda/include/thrust/iterator/iterator_traits.h:75:
+        In file included from /usr/local/cuda/include/thrust/iterator/iterator_traits.h:75:
        /usr/local/cuda/include/thrust/iterator/detail/iterator_traits.inl:60:53:
-       error: no type named 'iterator_category' in 'thrust::iterator_traits<thrust::device_ptr<void> >' typename thrust::iterator_traits<Iterator>::iterator_category
+        error: no type named 'iterator_category' in 'thrust::iterator_traits<thrust::device_ptr<void> >' typename thrust::iterator_traits<Iterator>::iterator_category
 make sure you got the latest version of the thrust library from https://github.com/thrust/thrust and copy its headers to `/usr/local/cuda/include/thrust`.
 
 #### Vicalib
@@ -251,5 +254,6 @@ If you get a Segmentation Fault, make sure you compiled libfreenect2 with the co
 To make Kinect2 work, the camera must appear as a USB 3.0 device under the USB 3.0 SuperSpeed Bus in the System Information application, in the USB section under Hardware.
 If it appears under USB 3.0 Hi-Speed Bus, it will not work (this is USB 2.0 actually).
 It has been observed that Mac only recognizes a Kinect2 camera as a USB 3.0 device after following these steps:
+
 1. Plug the USB cable from the camera to the computer first.
 2. Plug the camera to the power then.
