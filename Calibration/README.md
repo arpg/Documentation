@@ -163,7 +163,8 @@ This is an example of a `cameras.xml` file:
             <T_wc> [ 0.9997142, 0.003130488, 0.02369865, 0.2515873; -0.009590008, 0.9606334, 0.2776536, 0.001558329; -0.02189653, -0.2778015, 0.9603889, 0.006108747 ] </T_wc>
         </pose>
     </camera>
-</rig>```
+</rig>
+```
 
 
 ## Tips to calibrate a Kinect2 camera
