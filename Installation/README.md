@@ -22,6 +22,10 @@ You can use either Clang or GCC as C/C++ compilers. As general advice, use GCC i
 2. GCC uses `libstdc++` and Clang `libc++` (it used `stdlibc++` before Mac OS X 10.9, see [additional information](http://stackoverflow.com/questions/19774778/when-is-it-necessary-to-use-use-the-flag-stdlib-libstdc)).
 3. Clang can use `stdlibc++` by using the flag `-stdlib=libstdc++`. However, the `libstdc++` version shipped by Clang is 6.0.9, which corresponds to GCC 4.2.1 ([list of versions of GCC and stdlibc++](https://gcc.gnu.org/onlinedocs/libstdc++/manual/abi.html)). This version is old and does not have full support for C++11 (see [additional information](http://stackoverflow.com/questions/26447231/clang-does-not-recognize-stdshared-ptr-with-libstdc)).
 4. If you use Homebrew or MacPorts as package managers, take into account that they may use Clang by default.
+5. The compiler used by default is `/usr/bin/cc` and `/usr/bin/c++`, which are links to the real compiler binaries. You can modify them to change the default compiler of the system. To check the compiler version, you can do:
+
+        $ cc --version
+        $ c++ --version
 
 
 ### Using CUDA
@@ -30,12 +34,7 @@ If you need CUDA:
 1. To this day, thrust, a library used by CUDA, can't be compiled with Clang and `libc++`, so that libraries that use CUDA (OpenCV, libfreenect2, Kangaroo) must be compiled either with Clang and `libstdc++` or GCC.
 2. Kangaroo requires a CUDA version <= 6.5.
 3. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
-4. The compiler used by default is `/usr/bin/cc` and `/usr/bin/c++`, which are links to the real compiler binaries. You can modify them to change the default compiler of the system. To check the compiler version, you can do:
-
-        $ cc --version
-        $ c++ --version
-
-5. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
+4. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
 
   Clang with `libstdc++`:
   * `CMAKE_CXX_COMPILER=/usr/bin/cc`
