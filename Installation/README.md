@@ -29,9 +29,9 @@ You can use either Clang or GCC as C/C++ compilers. As general advice, use GCC i
 
 
 ### Using CUDA
-If you need CUDA:
+If you need Kangaroo with CUDA:
 
-1. To this day, thrust, a library used by CUDA, can't be compiled with Clang and `libc++`, so that libraries that use CUDA (OpenCV, libfreenect2, Kangaroo) must be compiled either with Clang and `libstdc++` or GCC.
+1. To this day, thrust, a library used by Kangaroo, can't be compiled with Clang and `libc++`, so that libraries that use CUDA (OpenCV, libfreenect2, Kangaroo) must be compiled either with Clang and `libstdc++` or GCC.
 2. Kangaroo requires a CUDA version <= 6.5.
 3. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
 4. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
