@@ -12,27 +12,38 @@ You can calibrate a single camera to obtain its intrinsic parameters, or several
 
 ## Building a calibration pattern
 
-There are two main calibration patterns: a small one that fits an A4 or Letter size sheet of paper, and a large one that fits an Arch E sheet of paper (3 x 4 feet, 914 x 1219 mm). The small one is suitable to calibrate a single camera or several cameras that are close each other. The large one is suitable for larger spaces.
+There are three main calibration patterns: a small one that fits an A4 or Letter size sheet of paper, a medium-sized one that fits a Arch D sheet of paper (2 x 3 feet, 610 x 914 mm) and a large one that fits an Arch E sheet of paper (3 x 4 feet, 914 x 1219 mm). The small one is suitable to calibrate a single camera or several cameras that are close each other. The medium and large ones are suitable for larger spaces.
 
 ### Creating a small pattern
 
 You can create a SVG or EPS file with the design of the small pattern with Vicalib:
 
-     ./vicalib -grid_preset 0 -output_pattern_file pattern.svg
+     ./vicalib -grid_preset small -output_pattern_file pattern.svg
      I1022 10:39:34.678490 1938174736 vicalib-engine.cc:329] File pattern.svg saved
 
 This produces an image like this, where the distance between circles is 14.11mm:
 
 ![Small pattern](images/patternsmall.png)
 
+### Creating a medium pattern
+
+You can create a SVG or EPS file with the design of the medium pattern with Vicalib:
+
+     ./vicalib -grid_preset medium -output_pattern_file pattern.svg
+     I1022 10:39:34.678490 1938174736 vicalib-engine.cc:329] File pattern.svg saved
+
+This produces an image like this, where the distance between circles is 31.56mm:
+
+![Small pattern](images/patternmedium.png)
+
 ### Creating a large pattern
 
 You can create a SVG or EPS file with the design of the large pattern with Vicalib:
 
-    $ ./vicalib -grid_preset 1 -output_pattern_file pattern.svg
+    $ ./vicalib -grid_preset large -output_pattern_file pattern.svg
     I1022 10:39:34.678490 1938174736 vicalib-engine.cc:329] File pattern.svg saved
 
-This produces an image like this, where the distance between the circles is 31.56mm:
+This produces an image like this, where the distance between circles is 31.56mm:
 
 ![Large pattern](images/patternlarge.png)
 
@@ -44,7 +55,7 @@ You can convert a vector SVG image into a rasterized PDF with ImageMagick:
 
     $ convert -density 300 pattern.svg pattern.pdf
 
-Attach the sheet of paper to a planar, rigid and thick surface, such as a piece of foam board or balsa wood.
+Attach the sheet of paper to a planar, rigid and thick surface, such as a piece of foam board or balsa wood. If the balsa board is thin, you can glue it to a thicker board to avoid blending. Spray glue over a Gator Board are recommended.
 
 ## Calibrating a camera
 
