@@ -8,3 +8,4 @@ General documentation for the ARPG software.
 
 * [Installation](Installation)
 * [Calibration](Calibration)
+* [3D Reconstruction](https://github.com/arpg/D-MoCap/wiki/Example-Applications)
