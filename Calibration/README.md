@@ -194,3 +194,32 @@ These are some helpful tips to calibrate a Kinect2 camera.
   * Covering the Kinect2 projector with a filter or with a sheet of paper.
   * Making the circles of the pattern darker by using an ink printer of by printing several times on the same sheet of paper.
   * Using the large calibration pattern.
+
+## Calibrating remote cameras
+
+You can calibrate and compute the relative rigid body transformation between multiple cameras connected to multiple computers over the same network.
+
+Let's suppose there are two or more auxiliary computers with a Kinect2 camera connected to each of them, and an additional master computer that performs the calibration.
+
+### Auxiliary computers
+
+1. Locate the [HAL](https://github.com/arpg/HAL) application `CamToNode` (`HAL/Applications/CamToNode`).
+2. Run the `CamToNode` program to export the images of the Kinect2 camera over the network. For example, to export the infrared image, you may do:
+
+        ./CamToNode -node aux_i -topic images -fps 30 -cam convert:[range=ir2]//freenect2:[rgb=0,ir=1,depth=0]//
+
+  This will export infrared images to the local network through the address `aux_i/images`. Change the node name `aux_i` to some name that is unique in your network. For example, `aux_1` for auxiliary computer 1, `aux_2` for auxiliary computer 2, etc.
+
+### Master computer
+
+Run Vicalib with the `join` driver to join several stream of images. For example, to acquire images from two auxiliary computers, you may do:
+
+    ./vicalib -grid_preset 1 -cam "join://node://aux_1/images&node://aux_2/images"
+
+Each `node://aux_i/images` URL retrieves images from the network resource with name `aux_i` and topic `images`. The `join` driver joins all of them into a single multiple-channel image stream. 
+
+You can concatenate as many `node` drivers as necessary for any arbitrary number of auxiliary computers by separating them with the `&` character. Note that the value of the `-cam` argument must be between quotes to escape the `&` in the command line.
+
+If there is only a single remote auxiliary computer, you can skip the `join` driver:
+
+    ./vicalib -grid_preset 1 -cam node://aux_1/images
