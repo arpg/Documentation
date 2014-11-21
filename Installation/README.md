@@ -37,14 +37,14 @@ If you need Kangaroo with CUDA:
 4. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
 
   Clang with `libstdc++`:
-  * `CMAKE_CXX_COMPILER=/usr/bin/cc`
+  * `CMAKE_CXX_COMPILER=/usr/bin/c++`
   * `CMAKE_CXX_FLAGS=-stdlib=libstdc++`
-  * `CMAKE_C_COMPILER=/usr/bin/c++`
+  * `CMAKE_C_COMPILER=/usr/bin/cc`
   * `CUDA_HOST_COMPILER=/usr/bin/clang`
 
   GCC:
-  * `CMAKE_CXX_COMPILER=/usr/local/bin/gcc`
-  * `CMAKE_C_COMPILER=/usr/local/bin/g++`
+  * `CMAKE_CXX_COMPILER=/usr/local/bin/g++`
+  * `CMAKE_C_COMPILER=/usr/local/bin/gcc`
   * `CUDA_HOST_COMPILER=/usr/local/bin/gcc-4.6`
 
   Notes:
