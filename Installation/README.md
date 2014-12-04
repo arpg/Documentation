@@ -11,6 +11,7 @@ This guide describes how to install the ARPG software used for calibration and 3
 * Kangaroo: CUDA wrapper that implements Kinect Fusion.
 * Vicalib: Visual-inertia calibration application.
 * Example applications to test the installation.
+* Additional documentation.
 
 ## Notes
 
@@ -271,3 +272,8 @@ It has been observed that Mac only recognizes a Kinect2 camera as a USB 3.0 devi
 
 1. Plug the USB cable from the camera to the computer first.
 2. Plug the camera to the power then.
+
+
+## Additional documentation
+
+* [How to install libfreenect2 for Kinect2 on Windows 8.1](https://github.com/OpenKinect/libfreenect2/issues/105)
