@@ -55,7 +55,7 @@ You can convert a vector SVG image into a rasterized PDF with ImageMagick:
 
     $ convert -density 300 pattern.svg pattern.pdf
 
-Attach the sheet of paper to a planar, rigid and thick surface, such as a piece of foam board or balsa wood. If the balsa board is thin, you can glue it to a thicker board to avoid blending. Spray glue over a Gator Board are recommended.
+Attach the sheet of paper to a planar, rigid and thick surface, such as a piece of foam board or balsa wood. If the balsa board is thin, you can glue it to a thicker board to avoid blending. The medium-sized pattern glued with spray blued to a [24" x 36" x 1/2" Gator Board](http://www.foamboardsource.com/gatorfoams--gatorfoam--1-2--gatorfoam.html) is recommended.
 
 ## Calibrating a camera
 
