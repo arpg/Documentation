@@ -227,7 +227,8 @@ Install this library if you require support for Kinect2.
 
 #### Node
 1. Get Node from https://github.com/arpg/Node
-2. ccmake and make normally.
+2. ccmake. Make sure `BUILD_SHARED_LIBS` and `ZMQPP_BUILD_SHARED` are `ON`.
+3. Make normally.
 
 #### HAL
 1. Get HAL from https://github.com/arpg/HAL
