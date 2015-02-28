@@ -185,30 +185,32 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
 ## Common ARPG utilities
 
 #### Miniglog
-1. Get Miniglog from https://github.com/arpg/miniglog
-2. ccmake and make normally.
+> git clone git@github.com:arpg/miniglog.git
+> mkdir -p builds/miniglog; cd builds/miniglog; cmake ../../miniglog; make; cd -
 
 #### Sophus
-1. Get Sophus from https://github.com/arpg/Sophus
-2. ccmake and make normally.
+> git clone git@github.com:arpg/Sophus.git
+> mkdir -p builds/Sophus; cd builds/Sophus; cmake ../../Sophus; make; cd -
 
 #### GLConsole (CVars)
-1. Get GLConsole from https://github.com/arpg/GLConsole
-2. ccmake and make normally.
+> git clone git@github.com:arpg/GLConsole.git
+> mkdir -p builds/GLConsole; cd builds/GLConsole; cmake ../../GLConsole; make; cd -
 
 #### Pangolin
-1. Get Pangolin from https://github.com/arpg/Pangolin
-2. ccmake and make normally.
+> git clone git@github.com:arpg/Pangolin.git
+> mkdir -p builds/Pangolin; cd builds/Pangolin; cmake ../../Pangolin; make; cd -
 
 #### SceneGraph
-1. Get SceneGraph from https://github.com/arpg/SceneGraph
-2. ccmake and make normally.
-
-## ARPG libraries
+> git clone git@github.com:arpg/SceneGraph.git
+> mkdir -p builds/SceneGraph; cd builds/SceneGraph; cmake ../../SceneGraph; make; cd -
 
 #### Calibu
-1. Get Calibu from https://github.com/arpg/Calibu
-2. ccmake and make normally.
+> git clone git@github.com:arpg/Calibu.git
+> mkdir -p builds/Calibu; cd builds/Calibu; cmake ../../Calibu; make; cd -
+
+#### Node
+> git clone https://github.com/arpg/Node
+> mkdir -p builds/Node; cd builds/Node; cmake ../../Node; make; cd -
 
 #### libfreenect2
 Install this library if you require support for Kinect2.
@@ -225,14 +227,10 @@ Install this library if you require support for Kinect2.
 
 5. If the header `OpenCL/cl.hpp` is not found, make sure you have a copy from http://www.khronos.org/registry/cl/api/1.2/cl.hpp.
 
-#### Node
-1. Get Node from https://github.com/arpg/Node
-2. ccmake. Make sure `BUILD_SHARED_LIBS` and `ZMQPP_BUILD_SHARED` are `ON`.
-3. Make normally.
-
 #### HAL
-1. Get HAL from https://github.com/arpg/HAL
-2. ccmake and make normally.
+> git clone https://github.com/arpg/HAL
+> mkdir -p builds/HAL; cd builds/HAL; cmake ../../HAL; make; cd -
+
 
 #### Kangaroo
 1. Get Kangaroo from https://github.com/arpg/Kangaroo.
