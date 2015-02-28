@@ -185,32 +185,32 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
 ## Common ARPG utilities
 
 #### Miniglog
-> git clone git@github.com:arpg/miniglog.git
-> mkdir -p builds/miniglog; cd builds/miniglog; cmake ../../miniglog; make; cd -
+ $  git clone git@github.com:arpg/miniglog.git
+ $  mkdir -p builds/miniglog; cd builds/miniglog; cmake ../../miniglog; make; cd -
 
 #### Sophus
-> git clone git@github.com:arpg/Sophus.git
-> mkdir -p builds/Sophus; cd builds/Sophus; cmake ../../Sophus; make; cd -
+ $ git clone git@github.com:arpg/Sophus.git
+ $ mkdir -p builds/Sophus; cd builds/Sophus; cmake ../../Sophus; make; cd -
 
 #### GLConsole (CVars)
-> git clone git@github.com:arpg/GLConsole.git
-> mkdir -p builds/GLConsole; cd builds/GLConsole; cmake ../../GLConsole; make; cd -
+ $ git clone git@github.com:arpg/GLConsole.git
+ $ mkdir -p builds/GLConsole; cd builds/GLConsole; cmake ../../GLConsole; make; cd -
 
 #### Pangolin
-> git clone git@github.com:arpg/Pangolin.git
-> mkdir -p builds/Pangolin; cd builds/Pangolin; cmake ../../Pangolin; make; cd -
+ $ git clone git@github.com:arpg/Pangolin.git
+ $ mkdir -p builds/Pangolin; cd builds/Pangolin; cmake ../../Pangolin; make; cd -
 
 #### SceneGraph
-> git clone git@github.com:arpg/SceneGraph.git
-> mkdir -p builds/SceneGraph; cd builds/SceneGraph; cmake ../../SceneGraph; make; cd -
+ $ git clone git@github.com:arpg/SceneGraph.git
+ $ mkdir -p builds/SceneGraph; cd builds/SceneGraph; cmake ../../SceneGraph; make; cd -
 
 #### Calibu
-> git clone git@github.com:arpg/Calibu.git
-> mkdir -p builds/Calibu; cd builds/Calibu; cmake ../../Calibu; make; cd -
+ $ git clone git@github.com:arpg/Calibu.git
+ $ mkdir -p builds/Calibu; cd builds/Calibu; cmake ../../Calibu; make; cd -
 
 #### Node
-> git clone https://github.com/arpg/Node
-> mkdir -p builds/Node; cd builds/Node; cmake ../../Node; make; cd -
+ $ git clone https://github.com/arpg/Node
+ $ mkdir -p builds/Node; cd builds/Node; cmake ../../Node; make; cd -
 
 #### libfreenect2
 Install this library if you require support for Kinect2.
@@ -228,8 +228,8 @@ Install this library if you require support for Kinect2.
 5. If the header `OpenCL/cl.hpp` is not found, make sure you have a copy from http://www.khronos.org/registry/cl/api/1.2/cl.hpp.
 
 #### HAL
-> git clone https://github.com/arpg/HAL
-> mkdir -p builds/HAL; cd builds/HAL; cmake ../../HAL; make; cd -
+ $ git clone https://github.com/arpg/HAL
+ $ mkdir -p builds/HAL; cd builds/HAL; cmake ../../HAL; make; cd -
 
 
 #### Kangaroo
