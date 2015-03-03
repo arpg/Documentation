@@ -18,7 +18,7 @@ There are three main calibration patterns: a small one that fits an A4 or Letter
 
 You can create a SVG or EPS file with the design of the small pattern with Vicalib:
 
-     ./vicalib -grid_preset small -output_pattern_file pattern.svg
+     ./vicalib_exec -grid_preset small -output_pattern_file pattern.svg
      I1022 10:39:34.678490 1938174736 vicalib-engine.cc:329] File pattern.svg saved
 
 This produces an image like this, where the distance between circles is 14.11mm:
@@ -29,7 +29,7 @@ This produces an image like this, where the distance between circles is 14.11mm:
 
 You can create a SVG or EPS file with the design of the medium pattern with Vicalib:
 
-     ./vicalib -grid_preset medium -output_pattern_file pattern.svg
+     ./vicalib_exec -grid_preset medium -output_pattern_file pattern.svg
      I1022 10:39:34.678490 1938174736 vicalib-engine.cc:329] File pattern.svg saved
 
 This produces an image like this, where the distance between circles is 31.56mm:
@@ -40,7 +40,7 @@ This produces an image like this, where the distance between circles is 31.56mm:
 
 You can create a SVG or EPS file with the design of the large pattern with Vicalib:
 
-    $ ./vicalib -grid_preset large -output_pattern_file pattern.svg
+    $ ./vicalib_exec -grid_preset large -output_pattern_file pattern.svg
     I1022 10:39:34.678490 1938174736 vicalib-engine.cc:329] File pattern.svg saved
 
 This produces an image like this, where the distance between circles is 31.56mm:
@@ -59,7 +59,7 @@ Attach the sheet of paper to a planar, rigid and thick surface, such as a piece 
 
 ## Calibrating a camera
 
-To calibrate a camera, call `vicalib` with the grid preset corresponding to your pattern and the desired camera in the HAL driver format: `vicalib -grid_preset <preset> -cam <driver>`.
+To calibrate a camera, call `vicalib_exec` with the grid preset corresponding to your pattern and the desired camera in the HAL driver format: `vicalib_exec -grid_preset <preset> -cam <driver>`.
 
 After capturing some images with the pattern, start the optimization by pressing the key `[`.
 
@@ -71,7 +71,7 @@ Vicalib expects the input image to be grayscale and coded by bytes (`unsigned ch
 
  For example, for a Kinect2 that uses the driver [libfreenect2](https://github.com/dorian3d/libfreenect2), you may use:
 
-    $ ./vicalib -grid_preset large -cam convert://freenect2:[rgb=1,ir=0,depth=0]//
+    $ ./vicalib_exec -grid_preset large -cam convert://freenect2:[rgb=1,ir=0,depth=0]//
 
 This is how Vicalib looks like when calibrating a RGB camera:
 
@@ -79,7 +79,7 @@ This is how Vicalib looks like when calibrating a RGB camera:
 
 You can also calibrate the infrared camera:
 
-    $ ./vicalib -grid_preset large -cam convert:[range=ir2]//freenect2:[rgb=0,ir=1,depth=0]//
+    $ ./vicalib_exec -grid_preset large -cam convert:[range=ir2]//freenect2:[rgb=0,ir=1,depth=0]//
 
 The option `range` in the `convert` driver is a normalization value to scale the infrared values to the range [0, 255]. So, the higher, the darker the image. You can use any value, but there are already 3 aliases defined:
 
@@ -89,7 +89,7 @@ The option `range` in the `convert` driver is a normalization value to scale the
 
 You can calibrate the RGB and infrared cameras at the same time:
 
-    $ ./vicalib -grid_preset large -cam convert:[range=ir2]//freenect2:[rgb=1,ir=1,depth=0]//
+    $ ./vicalib_exec -grid_preset large -cam convert:[range=ir2]//freenect2:[rgb=1,ir=1,depth=0]//
 
 This is how Vicalib looks like when calibrating a RGB and infrared cameras:
 
@@ -98,7 +98,7 @@ This is how Vicalib looks like when calibrating a RGB and infrared cameras:
 
 You can also calibrate two cameras at the same time if they use the same driver. Just connect the two cameras to the computer and run:
 
-    $ ./vicalib -grid_preset large -cam convert://freenect2:[rgb=1,ir=0,depth=0]//
+    $ ./vicalib_exec -grid_preset large -cam convert://freenect2:[rgb=1,ir=0,depth=0]//
 
 ![Vicalib calibrating two RGB cameras](images/vicalibdone.png)
 
@@ -106,7 +106,7 @@ To calibrate a camera and and IMU, you have to use an additional `-imu` paramete
 
 Vicalib supports several camera models. By default, it produces results following a polynomial model `poly3` with factors `k1`, `k2` and `k3`. You can change the models to `poly2`, `kb3` or `fov` with the argument `-models`, indicating one model per camera:
 
-    $ ./vicalib -grid_preset large -cam convert://freenect2:[rgb=1,ir=0,depth=0]// -models fov,fov
+    $ ./vicalib_exec -grid_preset large -cam convert://freenect2:[rgb=1,ir=0,depth=0]// -models fov,fov
 
 There are many more helpful options for Vicalib. Run `$ ./vicalib --help` to get more information.
 
@@ -214,7 +214,7 @@ Let's suppose there are two or more auxiliary computers with a Kinect2 camera co
 
 Run Vicalib with the `join` driver to join several stream of images. For example, to acquire images from two auxiliary computers, you may do:
 
-    ./vicalib -grid_preset large -cam "join://node://aux_1/images&node://aux_2/images"
+    ./vicalib_exec -grid_preset large -cam "join://node://aux_1/images&node://aux_2/images"
 
 Each `node://aux_i/images` URL retrieves images from the network resource with name `aux_i` and topic `images`. The `join` driver joins all of them into a single multiple-channel image stream. 
 
@@ -222,4 +222,4 @@ You can concatenate as many `node` drivers as necessary for any arbitrary number
 
 If there is only a single remote auxiliary computer, you can skip the `join` driver:
 
-    ./vicalib -grid_preset large -cam node://aux_1/images
+    ./vicalib_exec -grid_preset large -cam node://aux_1/images
