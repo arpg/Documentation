@@ -32,10 +32,9 @@ You can use either Clang or GCC as C/C++ compilers. As general advice, use GCC i
 ### Using CUDA
 If you need Kangaroo with CUDA:
 
-1. To this day, thrust, a library used by Kangaroo, can't be compiled with Clang and `libc++`, so that libraries that use CUDA (OpenCV, libfreenect2, Kangaroo) must be compiled either with Clang and `libstdc++` or GCC.
-2. Kangaroo requires a CUDA version <= 6.5.
-3. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
-4. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
+1. Kangaroo requires a CUDA version <= 7.0.
+2. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
+3. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
 
   Clang with `libstdc++`:
   * `CMAKE_CXX_COMPILER=/usr/bin/c++`
@@ -60,9 +59,9 @@ If you need Kangaroo with CUDA:
 ### Basic
 
 Dependencies common to most of the libraries:
-* CMake 3 with ccmake,
+* CMake 2.8 with ccmake,
 * Eigen3,
-* Optioanlly, GCC 4.6 (a higher version can be used except for Kangaroo).
+* Optioanlly, GCC 4.6 (a higher version can be used, although it takes some time for us to confirm compatibility with the bleeding edge).
 
 The usual way to build a library or application that supports CMake (contains a `CMakeLists.txt` file) is as following:
 
@@ -75,7 +74,7 @@ The usual way to build a library or application that supports CMake (contains a 
 ### ARPG dependencies
 
 #### CUDA
-CUDA <= 6.5 is required by Kangaroo and libfreenect2, and you may also use it for OpenCV.
+CUDA <= 7.0 is required by Kangaroo and libfreenect2, and you may also use it for OpenCV.
 
 1. Install CUDA for nVidia graphic cards from https://developer.nvidia.com/cuda-downloads?sid=625109.
 2. Get the latest thrust library from https://github.com/thrust/thrust and copy the thrust directory to `/usr/local/cuda/include`.
