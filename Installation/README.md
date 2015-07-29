@@ -70,6 +70,7 @@ The usual way to build a library or application that supports CMake (contains a 
     $ cd build
     $ ccmake .. # set compilation options, [c]onfigure and [g]enerate
     $ make
+    $ make install
 
 ### ARPG dependencies
 
@@ -88,19 +89,19 @@ CUDA <= 7.0 is required by Kangaroo and libfreenect2, and you may also use it fo
 
 #### GFlags
 
-1. Get and install Gflags from https://code.google.com/p/gflags/.
+1. Get and install Gflags from https://code.google.com/p/gflags/ or using your system's package management software.
 2. For version >= 2.1.1, in ccmake set variable `GFLAGS_NAMESPACE=google`.
 
 #### Glog
 
-1. Get and install Glog from https://code.google.com/p/google-glog/.
+1. Get and install Glog from https://code.google.com/p/google-glog/ or using your system's package management software.
 2. Set environment variable `GLOG_logtostderr=1`. For example, in `~/.bash_profile`:
 
         export GLOG_logtostderr=1
 
 #### Ceres Solver
 
-1. Get and install Ceres Solver from http://ceres-solver.org/.
+1. Get and install Ceres Solver from http://ceres-solver.org/ or using your system's package management software.
 2. If you get any error similar to this:
 
         ceres-solver/examples/libmv_bundle_adjuster.cc:300:58: error: 'read' was not declared in this scope
@@ -125,7 +126,7 @@ CUDA <= 7.0 is required by Kangaroo and libfreenect2, and you may also use it fo
 
 #### Google Protocol Buffers
 
-1. Get and install Protocol Buffers from https://github.com/google/protobuf/.
+1. Get and install Protocol Buffers from https://github.com/google/protobuf/ or using your system's package management software.
 2. If you use GCC and get a linking error as this one:
 
         dyld: Symbol not found: __ZNSt3tr18__detail12__prime_listE
@@ -143,7 +144,7 @@ You will have to add the `export` instruction before executing any program that 
 
 #### OpenCV
 
-1. Get an install OpenCV from http://opencv.org/downloads.html.
+1. Get an install OpenCV from http://opencv.org/downloads.html or using your system's package management software.
 2. Make sure variable `CUDA_HOST_COMPILER` is set either to gcc-4.6 or clang (and not just gcc or cc).
 3. If OpenCV version is 2.4.9 and you get this error
 
@@ -186,33 +187,29 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
 
 ## Common ARPG utilities
 
-#### Miniglog
-        $ git clone git@github.com:arpg/miniglog.git
-        $ mkdir -p builds/miniglog; cd builds/miniglog; cmake ../../miniglog; make; cd -
-
 #### Sophus
         $ git clone git@github.com:arpg/Sophus.git
-        $ mkdir -p builds/Sophus; cd builds/Sophus; cmake ../../Sophus; make; cd -
+        $ mkdir -p builds/Sophus; cd builds/Sophus; cmake ../../Sophus; make; make install; cd -
 
 #### GLConsole (CVars)
         $ git clone git@github.com:arpg/GLConsole.git
-        $ mkdir -p builds/GLConsole; cd builds/GLConsole; cmake ../../GLConsole; make; cd -
+        $ mkdir -p builds/GLConsole; cd builds/GLConsole; cmake ../../GLConsole; make; make install; cd -
 
 #### Pangolin
         $ git clone git@github.com:arpg/Pangolin.git
-        $ mkdir -p builds/Pangolin; cd builds/Pangolin; cmake ../../Pangolin; make; cd -
+        $ mkdir -p builds/Pangolin; cd builds/Pangolin; cmake ../../Pangolin; make; make install; cd -
 
 #### SceneGraph
         $ git clone git@github.com:arpg/SceneGraph.git
-        $ mkdir -p builds/SceneGraph; cd builds/SceneGraph; cmake ../../SceneGraph; make; cd -
+        $ mkdir -p builds/SceneGraph; cd builds/SceneGraph; cmake ../../SceneGraph; make; make install; cd -
 
 #### Calibu
         $ git clone git@github.com:arpg/Calibu.git
-        $ mkdir -p builds/Calibu; cd builds/Calibu; cmake ../../Calibu; make; cd -
+        $ mkdir -p builds/Calibu; cd builds/Calibu; cmake ../../Calibu; make; make install; cd -
 
 #### Node
         $ git clone https://github.com/arpg/Node
-        $ mkdir -p builds/Node; cd builds/Node; cmake ../../Node; make; cd -
+        $ mkdir -p builds/Node; cd builds/Node; cmake ../../Node; make; make install; cd -
 
 #### libfreenect2
 Install this library if you require support for Kinect2.
@@ -231,7 +228,7 @@ Install this library if you require support for Kinect2.
 
 #### HAL
         $ git clone https://github.com/arpg/HAL
-        $ mkdir -p builds/HAL; cd builds/HAL; cmake ../../HAL; make; cd -
+        $ mkdir -p builds/HAL; cd builds/HAL; cmake ../../HAL; make; make install; cd -
 
 
 #### Kangaroo
@@ -248,7 +245,7 @@ Install this library if you require support for Kinect2.
 
 #### Vicalib
 1. Get Vicalib from https://github.com/arpg/vicalib
-2. ccmake and make normally.
+2. ccmake and make install normally.
 3. If you compile with Clang and get errors saying that `shared_ptr` does not belong to `std::`, probably your `libstdc++` implementation is old (e.g. version 6.0.9 shipped with GCC 4.2.1) and you should update it. Alternatively, use GCC to build Vicalib.
 
 
