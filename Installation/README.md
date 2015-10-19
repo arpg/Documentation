@@ -3,7 +3,7 @@
 
 This guide describes how to install the ARPG software used for calibration and 3D reconstruction on Mac OS X Mavericks 10.9.4. It encompasses:
 * Common dependencies: CUDA, Gflags, Glog, Eigen3, Ceres Solved, Google Protobuf, OpenCV.
-* Common ARPG utilities: Miniglog, Sophus, GLConsole, Pangolin, SceneGraph.
+* Common ARPG utilities: Sophus, CVars, Pangolin, SceneGraph.
 * Calibu: Calibration library.
 * Libfreenect2: Open source driver for Kinect2.
 * Node: Network communication library.
