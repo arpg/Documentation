@@ -215,7 +215,7 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
 Install this library if you require support for Kinect2.
 
 1. Get libfreenect2 from https://github.com/OpenKinect/libfreenect2.
-2. Follow compilation instructions in that website (install and compile dependencies). *If you are on OS X,* when running CMake for libfreenect2 it is recommended you pass the flag `-DENABLE_OPENGL=OFF` in order to bypass bug OpenKinect/libfreenect2#31.
+2. Follow compilation instructions in that website (install and compile dependencies). *If you are on OS X,* when running CMake for libfreenect2 it is recommended you pass the flag `-DENABLE_OPENGL=OFF` in order to bypass bug https://github.com/OpenKinect/libfreenect2/issues/31.
 
 #### HAL
         $ git clone https://github.com/arpg/HAL
