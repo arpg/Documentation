@@ -214,17 +214,8 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
 #### libfreenect2
 Install this library if you require support for Kinect2.
 
-1. Get libfreenect2 from https://github.com/dorian3d/libfreenect2.
-2. Follow compilation instructions in that website (install and compile dependencies).
-3. Go to `examples/protonect`, build with `cmake` and `make install`. Some versions of Clang (Apple LLVM < 6) cannot compile this library because either the STL thread library cannot be used with `libstdc++` or because they don't recognize the keyword `thread_local`. If you have any of these errors, use GCC or a more recent version of Clang.
-4. If you are compiling with CUDA and get this error
-
-        ld: warning: directory not found for option '-L-Wl,/usr/local/cuda'
-        ld: can't map file, errno=22 file '/usr/local/cuda' for architecture x86_64
-
-  see the notes about installing OpenCV above.
-
-5. If the header `OpenCL/cl.hpp` is not found, make sure you have a copy from http://www.khronos.org/registry/cl/api/1.2/cl.hpp.
+1. Get libfreenect2 from https://github.com/OpenKinect/libfreenect2.
+2. Follow compilation instructions in that website (install and compile dependencies). *If you are on OS X,* when running CMake for libfreenect2 it is recommended you pass the flag `-DENABLE_OPENGL=OFF` in order to bypass bug https://github.com/OpenKinect/libfreenect2/issues/31.
 
 #### HAL
         $ git clone https://github.com/arpg/HAL
