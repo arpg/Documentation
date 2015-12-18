@@ -16,7 +16,7 @@ Some commonly used examples,
 
 ```
 ./SensorViewer -cam log://~/path/to/file.log
-./SensorViewer -cam ximea:[id0=33472151,id1=33470951,sync=2]// -imu microstrain://
+./SensorViewer -cam ximea:[id0=33472151,id1=33470951,sync=2]// -imu microstrain:// -posys vicon://192.168.20.100[NinjaCar]
 ```
 
 
