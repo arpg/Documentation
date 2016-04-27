@@ -221,6 +221,9 @@ Install this library if you require support for Kinect2.
         $ git clone https://github.com/arpg/HAL
         $ mkdir -p builds/HAL; cd builds/HAL; cmake ../../HAL; make; make install; cd -
 
+#### arpg_apps
+        $ git clone https://github.com/arpg/arpg_apps
+        $ mkdir -p builds/arpg_apps; cd builds/arpg_apps; cmake ../../arpg_apps; make; cd -
 
 #### Kangaroo
 1. Get Kangaroo from https://github.com/arpg/Kangaroo.
