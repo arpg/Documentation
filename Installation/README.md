@@ -220,6 +220,15 @@ Install this library if you require support for Kinect2.
 #### HAL
         $ git clone https://github.com/arpg/HAL
         $ mkdir -p builds/HAL; cd builds/HAL; cmake ../../HAL; make; make install; cd -
+##### Gladiator Landmark IMU on MacOS
+To support this IMU with the CP2102 dongle, install the Mac CP2102 drivers from:
+https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx
+
+Enable the driver in the HAL build by defining BUILD_Gladiator_Imu
+
+To run, specify the port in the URI: gladiator:[port=/dev/cu.SLAB_USBtoUART]//
+
+The kernel driver on Mac doesn't close the port properly when an application segfaults - you may need to unplug and replug the serial dongle to restore operation.
 
 #### arpg_apps
         $ git clone https://github.com/arpg/arpg_apps
