@@ -8,8 +8,8 @@ This guide describes how to install the ARPG software used for calibration and 3
 * Libfreenect2: Open source driver for Kinect2.
 * Node: Network communication library.
 * HAL: Hardware abstraction layer for device access.
-* Kangaroo: CUDA wrapper that implements Kinect Fusion.
 * Vicalib: Visual-inertia calibration application.
+* Kangaroo: CUDA wrapper that implements Kinect Fusion.
 * Example applications to test the installation.
 * Additional documentation.
 
@@ -27,32 +27,6 @@ You can use either Clang or GCC as C/C++ compilers. As general advice, use GCC i
 
         $ cc --version
         $ c++ --version
-
-
-### Using CUDA
-If you need Kangaroo with CUDA:
-
-1. Kangaroo requires a CUDA version <= 7.0.
-2. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
-3. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
-
-  Clang with `libstdc++`:
-  * `CMAKE_CXX_COMPILER=/usr/bin/c++`
-  * `CMAKE_CXX_FLAGS=-stdlib=libstdc++`
-  * `CMAKE_C_COMPILER=/usr/bin/cc`
-  * `CUDA_HOST_COMPILER=/usr/bin/clang`
-
-  GCC:
-  * `CMAKE_CXX_COMPILER=/usr/local/bin/g++`
-  * `CMAKE_C_COMPILER=/usr/local/bin/gcc`
-  * `CUDA_HOST_COMPILER=/usr/local/bin/gcc-4.6`
-
-  Notes:
-    * We are assuming that gcc is installed in `/usr/local/bin/gcc-4.6` and that there exist symbolic links `/usr/local/bin/gcc` and `/usr/local/bin/g++`. If these are not the paths in your system, please change them.
-    * Variable `CUDA_HOST_COMPILER` only appears in libraries that use CUDA.
-    * `CUDA_HOST_COMPILER` cannot be the path to a symbolic link, but a path to a binary.
-    * In ccmake, after the configuration step, the `CUDA_HOST_COMPILER` value may have changed to the same value as `CMAKE_C_COMPILER`. Make sure it contains the correct path before generating the makefiles.
-
 
 ## Common dependencies
 
@@ -191,9 +165,9 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
         $ git clone git@github.com:arpg/Sophus.git
         $ mkdir -p builds/Sophus; cd builds/Sophus; cmake ../../Sophus; make; make install; cd -
 
-#### GLConsole (CVars)
-        $ git clone git@github.com:arpg/GLConsole.git
-        $ mkdir -p builds/GLConsole; cd builds/GLConsole; cmake ../../GLConsole; make; make install; cd -
+#### CVars (GLConsole)
+        $ git clone git@github.com:arpg/CVars.git
+        $ mkdir -p builds/CVars; cd builds/CVars; cmake ../../CVars; make; make install; cd -
 
 #### Pangolin
         $ git clone git@github.com:arpg/Pangolin.git
@@ -234,7 +208,13 @@ The kernel driver on Mac doesn't close the port properly when an application seg
         $ git clone https://github.com/arpg/arpg_apps
         $ mkdir -p builds/arpg_apps; cd builds/arpg_apps; cmake ../../arpg_apps; make; cd -
 
+#### Vicalib
+1. Get Vicalib from https://github.com/arpg/vicalib
+2. ccmake and make install normally.
+3. If you compile with Clang and get errors saying that `shared_ptr` does not belong to `std::`, probably your `libstdc++` implementation is old (e.g. version 6.0.9 shipped with GCC 4.2.1) and you should update it. Alternatively, use GCC to build Vicalib.
+
 #### Kangaroo
+
 1. Get Kangaroo from https://github.com/arpg/Kangaroo.
 2. Run ccmake on the Kangaroo source directory and set `BUILD_APPLICATIONS=OFF`.
 3. Make sure you set variable `CUDA_HOST_COMPILER` as desired.
@@ -245,12 +225,30 @@ The kernel driver on Mac doesn't close the port properly when an application seg
         /usr/local/cuda/include/thrust/iterator/detail/iterator_traits.inl:60:53:
         error: no type named 'iterator_category' in 'thrust::iterator_traits<thrust::device_ptr<void> >' typename thrust::iterator_traits<Iterator>::iterator_category
   make sure you got the latest version of the thrust library from https://github.com/thrust/thrust and copy its headers to `/usr/local/cuda/include/thrust`.
+  
+##### Using CUDA
+If you need Kangaroo with CUDA:
 
-#### Vicalib
-1. Get Vicalib from https://github.com/arpg/vicalib
-2. ccmake and make install normally.
-3. If you compile with Clang and get errors saying that `shared_ptr` does not belong to `std::`, probably your `libstdc++` implementation is old (e.g. version 6.0.9 shipped with GCC 4.2.1) and you should update it. Alternatively, use GCC to build Vicalib.
+1. Kangaroo requires a CUDA version >= 7.0.
+2. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
+3. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
 
+  Clang with `libstdc++`:
+  * `CMAKE_CXX_COMPILER=/usr/bin/c++`
+  * `CMAKE_CXX_FLAGS=-stdlib=libstdc++`
+  * `CMAKE_C_COMPILER=/usr/bin/cc`
+  * `CUDA_HOST_COMPILER=/usr/bin/clang`
+
+  GCC:
+  * `CMAKE_CXX_COMPILER=/usr/local/bin/g++`
+  * `CMAKE_C_COMPILER=/usr/local/bin/gcc`
+  * `CUDA_HOST_COMPILER=/usr/local/bin/gcc-4.6`
+
+  Notes:
+    * We are assuming that gcc is installed in `/usr/local/bin/gcc-4.6` and that there exist symbolic links `/usr/local/bin/gcc` and `/usr/local/bin/g++`. If these are not the paths in your system, please change them.
+    * Variable `CUDA_HOST_COMPILER` only appears in libraries that use CUDA.
+    * `CUDA_HOST_COMPILER` cannot be the path to a symbolic link, but a path to a binary.
+    * In ccmake, after the configuration step, the `CUDA_HOST_COMPILER` value may have changed to the same value as `CMAKE_C_COMPILER`. Make sure it contains the correct path before generating the makefiles.
 
 ## Example applications
 
