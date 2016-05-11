@@ -254,9 +254,9 @@ If you need Kangaroo with CUDA:
 
 ### SensorViewer
 
-You can test if HAL and libfreenect2 are correctly installed by using `SensorViewer` with a Kinect2 camera. Run:
+You can test if HAL, libfreenect2 and arpg_apps are correctly installed by using `SensorViewer` with a Kinect2 camera. Run:
 
-        $ cd HAL/build/Applications/SensorViewer
+        $ cd arpg_apps/build/Applications/SensorViewer
         $ ./SensorViewer -cam convert:[fmt=RGB8,range=10000]//freenect2:[rgb=1,ir=1,depth=1]//
 
 You will see the RGB, infrared and depth live images:
