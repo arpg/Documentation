@@ -49,7 +49,7 @@ The usual way to build a library or application that supports CMake (contains a 
 ### ARPG dependencies
 
 #### CUDA
-CUDA <= 7.0 is required by Kangaroo and libfreenect2, and you may also use it for OpenCV.
+CUDA <= 7.0 is required by Kangaroo, and you may also use it for OpenCV.
 
 1. Install CUDA for nVidia graphic cards from https://developer.nvidia.com/cuda-downloads?sid=625109.
 2. Get the latest thrust library from https://github.com/thrust/thrust and copy the thrust directory to `/usr/local/cuda/include`.
