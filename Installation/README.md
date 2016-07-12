@@ -153,9 +153,10 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
   Similar problems occur even using alternatives Carbon or Qt. To solve this, you have to use Clang with `-stdlib=libstdc++`, or to disable the highgui module.
 
 #### ZeroMQ C++ API
-Note this issue: https://github.com/zeromq/zmqpp/issues/164.
         $ git@github.com:zeromq/zmqpp.git
         $ mkdir -p builds/zmqpp; cd builds/zmqpp; cmake ../../zmqpp; make; cd -
+        
+For El Capitan users, note: https://github.com/zeromq/zmqpp/issues/164
 
 #### OSXGlut
 1. Optionally, you can install OSXGlut from https://github.com/stevenlovegrove/osxglut.
