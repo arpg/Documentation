@@ -1,7 +1,6 @@
 # ARPG Software Installation Notes
-## Mac OS X Mavericks 10.9.4
 
-This guide describes how to install the ARPG software used for calibration and 3D reconstruction on Mac OS X Mavericks 10.9.4. It encompasses:
+This guide describes how to install the ARPG software used for calibration and 3D reconstruction. The installation notes consider only a UNIX-based operating system, and makes notes for the most popular (Ubuntu and Mac OS X) throughout. The guide encompasses:
 * Common dependencies: CUDA, Gflags, Glog, Eigen3, Ceres Solved, Google Protobuf, OpenCV.
 * Common ARPG utilities: Sophus, CVars, Pangolin, SceneGraph.
 * Calibu: Calibration library.
@@ -17,11 +16,10 @@ This guide describes how to install the ARPG software used for calibration and 3
 
 ### Clang vs GCC
 
-You can use either Clang or GCC as C/C++ compilers. As general advice, use GCC if you need CUDA (e.g. for Kangaroo), and Clang otherwise. You must take this notes into account before choosing one:
+You can use either Clang or GCC as C/C++ compilers. As general advice, use the compiler that is the default for your operating system (GCC for Linux, Clang for Mac OS X). You must take this notes into account before choosing a compiler:
 
-1. You can't mix libraries compiled by different compilers unless you make they use the same standard library implementation.
-2. GCC uses `libstdc++` and Clang `libc++` (it used `stdlibc++` before Mac OS X 10.9, see [additional information](http://stackoverflow.com/questions/19774778/when-is-it-necessary-to-use-use-the-flag-stdlib-libstdc)).
-3. Clang can use `stdlibc++` by using the flag `-stdlib=libstdc++`. However, the `libstdc++` version shipped by Clang is 6.0.9, which corresponds to GCC 4.2.1 ([list of versions of GCC and stdlibc++](https://gcc.gnu.org/onlinedocs/libstdc++/manual/abi.html)). This version is old and does not have full support for C++11 (see [additional information](http://stackoverflow.com/questions/26447231/clang-does-not-recognize-stdshared-ptr-with-libstdc)).
+1. You can't mix libraries compiled by different compilers unless you make them use the same standard library implementation (`libstdc++` or `libc++`). In modern times, by default GCC uses `libstdc++` and Clang `libc++`.
+3. Clang can use `stdlibc++` by using the flag `-stdlib=libstdc++`. Take careful note that  the `libstdc++` version shipped with Clang must support C++11 ([list of versions of GCC and stdlibc++](https://gcc.gnu.org/onlinedocs/libstdc++/manual/abi.html), with [additional information](http://stackoverflow.com/questions/26447231/clang-does-not-recognize-stdshared-ptr-with-libstdc)).
 4. If you use Homebrew or MacPorts as package managers, take into account that they may use Clang by default.
 5. The compiler used by default is `/usr/bin/cc` and `/usr/bin/c++`, which are links to the real compiler binaries. You can modify them to change the default compiler of the system. To check the compiler version, you can do:
 
@@ -35,7 +33,7 @@ You can use either Clang or GCC as C/C++ compilers. As general advice, use GCC i
 Dependencies common to most of the libraries:
 * CMake 2.8 with ccmake,
 * Eigen3,
-* Optioanlly, GCC 4.6 (a higher version can be used, although it takes some time for us to confirm compatibility with the bleeding edge).
+* GCC >=4.6 / Clang >=3.3 (a higher version can be used, although it takes some time for us to confirm compatibility with the bleeding edge).
 
 The usual way to build a library or application that supports CMake (contains a `CMakeLists.txt` file) is as following:
 
@@ -49,7 +47,7 @@ The usual way to build a library or application that supports CMake (contains a 
 ### ARPG dependencies
 
 #### CUDA
-CUDA <= 7.0 is required by Kangaroo, and you may also use it for OpenCV.
+CUDA >= 7.0 is required by Kangaroo, and you may also use it for OpenCV.
 
 1. Install CUDA for nVidia graphic cards from https://developer.nvidia.com/cuda-downloads?sid=625109.
 2. Get the latest thrust library from https://github.com/thrust/thrust and copy the thrust directory to `/usr/local/cuda/include`.
@@ -59,23 +57,23 @@ CUDA <= 7.0 is required by Kangaroo, and you may also use it for OpenCV.
 
 #### Eigen
 
-1. Get and install Eigen from http://eigen.tuxfamily.org/index.php?title=Main_Page.
+1. Get and install Eigen using your system's package management software, or from http://eigen.tuxfamily.org/index.php?title=Main_Page.
 
 #### GFlags
 
-1. Get and install Gflags from https://code.google.com/p/gflags/ or using your system's package management software.
-2. For version >= 2.1.1, in ccmake set variable `GFLAGS_NAMESPACE=google`.
+1. Get and install Gflags using your system's package management software, or from https://github.com/gflags/gflags.
+2. If you are building from source, then for version >= 2.1.1, in ccmake set variable `GFLAGS_NAMESPACE=google`.
 
-#### Glog
+#### GLog
 
-1. Get and install Glog from https://code.google.com/p/google-glog/ or using your system's package management software.
+1. Get and install GLog using your system's package management software, or from https://github.com/google/glog.
 2. Set environment variable `GLOG_logtostderr=1`. For example, in `~/.bash_profile`:
 
         export GLOG_logtostderr=1
 
 #### Ceres Solver
 
-1. Get and install Ceres Solver from http://ceres-solver.org/ or using your system's package management software.
+1. Get and install Ceres Solver using your system's package management software, or from http://ceres-solver.org/.
 2. If you get any error similar to this:
 
         ceres-solver/examples/libmv_bundle_adjuster.cc:300:58: error: 'read' was not declared in this scope
@@ -100,7 +98,7 @@ CUDA <= 7.0 is required by Kangaroo, and you may also use it for OpenCV.
 
 #### Google Protocol Buffers
 
-1. Get and install Protocol Buffers from https://github.com/google/protobuf/ or using your system's package management software.
+1. Get and install Protocol Buffers from your package management software, or from https://github.com/google/protobuf.
 2. If you use GCC and get a linking error as this one:
 
         dyld: Symbol not found: __ZNSt3tr18__detail12__prime_listE
@@ -108,7 +106,7 @@ CUDA <= 7.0 is required by Kangaroo, and you may also use it for OpenCV.
         Expected in: /usr/lib/libstdc++.6.dylib
         in protobuf/src/.libs/libprotobuf.9.dylib
 
-  Make sure you are not using an old `libstdc++` (e.g. libstdc++.6.0.9 provided by Clang by default). A fast trick to use a newer version is to add to `DYLD_LIBRARY_PATH` the path to the newer `libstdc++`. For example, for gcc 4.8.2 installed by Homebrew:
+  Make sure you are not using an old `libstdc++` (e.g. libstdc++.6.0.9 provided by older versions of Clang). A fast trick to use a newer version is to add to `DYLD_LIBRARY_PATH` the path to the newer `libstdc++`. For example, for gcc 4.8.2 installed by Homebrew:
 
        $ export DYLD_LIBRARY_PATH="/usr/local/Cellar/gcc/4.8.2_1/lib/gcc/x86_64-apple-darwin13.2.0/4.8.2/:$DYLD_LIBRARY_PATH"
        $ ./configure CC=/usr/local/bin/gcc CXX=/usr/local/bin/g++
@@ -118,32 +116,9 @@ You will have to add the `export` instruction before executing any program that 
 
 #### OpenCV
 
-1. Get an install OpenCV from http://opencv.org/downloads.html or using your system's package management software.
+1. Get an install OpenCV3 using your system's package management software, or from http://opencv.org/downloads.html.
 2. Make sure variable `CUDA_HOST_COMPILER` is set either to gcc-4.6 or clang (and not just gcc or cc).
-3. If OpenCV version is 2.4.9 and you get this error
-
-        ld: warning: directory not found for option '-L-Wl,/usr/local/cuda'
-        ld: can't map file, errno=22 file '/usr/local/cuda' for architecture x86_64
-        
-  go to `opencv/cmake/FindCUDA.cmake` and change line
-
-        list(APPEND CUDA_LIBRARIES -Wl,-rpath "-Wl,${_cuda_path_to_cudart}"
-        
-  for
-
-        list(APPEND CUDA_LIBRARIES -Wl,-rpath "${_cuda_path_to_cudart}".
-        
-  You may need to do the same in the system CMake modules, for example in `/usr/local/share/cmake-3.0/Modules/FindCUDA.cmake`. See [additional information](
-http://answers.opencv.org/question/33972/problems-with-249-and-os-x-1085/).
-
-4. There is a known bug in OpenCV 2.4.9 when compiled with CUDA 6.5. If you get this error:
-
-        opencv-2.4.9/modules/gpu/src/nvidia/core/NCVPixelOperations.hpp(51): error: a storage class is not allowed in an explicit specialization
-
-  try replacing file [NCVPixelOperations.hpp](
-http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11054b66863e1e9f753141) in OpenCV.
-
-5. The default OpenCV `highgui` module uses Cocoa as rendering framework by default. This module uses Objective C++ 2 syntax that is not supported by gcc <= 4.8, causing errors as these:
+3. The default OpenCV `highgui` module uses Cocoa as rendering framework by default. This module uses Objective C++ 2 syntax that is not supported by gcc <= 4.8, causing errors as these:
 
         [ 20%] Building CXX object modules/highgui/CMakeFiles/opencv_highgui.dir/src/window_cocoa.mm.o
         opencv-2.4.9/modules/highgui/src/window_cocoa.mm: In function 'void cvDestroyAllWindows()':
@@ -156,7 +131,7 @@ http://code.opencv.org/projects/opencv/repository/revisions/feb74b125d7923c0bc11
         $ git@github.com:zeromq/zmqpp.git
         $ mkdir -p builds/zmqpp; cd builds/zmqpp; cmake ../../zmqpp; make; cd -
         
-For El Capitan users, note: https://github.com/zeromq/zmqpp/issues/164
+For El Capitan users, note: https://github.com/zeromq/zmqpp/issues/164.
 
 #### OSXGlut
 1. Optionally, you can install OSXGlut from https://github.com/stevenlovegrove/osxglut.
@@ -213,7 +188,7 @@ The kernel driver on Mac doesn't close the port properly when an application seg
 #### Vicalib
 1. Get Vicalib from https://github.com/arpg/vicalib
 2. ccmake and make install normally.
-3. If you compile with Clang and get errors saying that `shared_ptr` does not belong to `std::`, probably your `libstdc++` implementation is old (e.g. version 6.0.9 shipped with GCC 4.2.1) and you should update it. Alternatively, use GCC to build Vicalib.
+3. If you compile with Clang and get errors saying that `shared_ptr` does not belong to `std::`, your `libstdc++` implementation is probably old (e.g. version 6.0.9 shipped with GCC 4.2.1) and you should update it. Alternatively, use GCC to build Vicalib.
 
 #### Kangaroo
 
@@ -229,8 +204,6 @@ The kernel driver on Mac doesn't close the port properly when an application seg
   make sure you got the latest version of the thrust library from https://github.com/thrust/thrust and copy its headers to `/usr/local/cuda/include/thrust`.
   
 ##### Using CUDA
-If you need Kangaroo with CUDA:
-
 1. Kangaroo requires a CUDA version >= 7.0.
 2. If you use GCC, it has been observed that CUDA works with GCC 4.6 but it does not with higher versions (4.7 or 4.8).  Other libraries can use higher versions of GCC.
 3. For libraries that use CMake as building system, the compiler can be set during the configuration (running `ccmake`, after [t]oggling advanced mode). You are likely to set one of these sets of variables:
