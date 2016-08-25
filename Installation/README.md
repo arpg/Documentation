@@ -1,6 +1,6 @@
 # ARPG Software Installation Notes
 
-This guide describes how to install the ARPG software used for calibration and 3D reconstruction. The installation notes consider only a UNIX-based operating system, and makes notes for the most popular (Ubuntu and Mac OS X) throughout. The guide encompasses:
+This guide describes how to install the ARPG software used for calibration and 3D reconstruction. The installation notes consider only a UNIX-based operating system, and makes notes for the most popular (Ubuntu and Mac OS X) throughout. *If running Ubuntu, make sure you are using the latest stable release.* We do not write our software based on beta releases of any dependencies. The guide encompasses:
 * Common dependencies: CUDA, Gflags, Glog, Eigen3, Ceres Solved, Google Protobuf, OpenCV.
 * Common ARPG utilities: Sophus, CVars, Pangolin, SceneGraph.
 * Calibu: Calibration library.
@@ -127,11 +127,14 @@ You will have to add the `export` instruction before executing any program that 
 
   Similar problems occur even using alternatives Carbon or Qt. To solve this, you have to use Clang with `-stdlib=libstdc++`, or to disable the highgui module.
 
+#### TinyXML2
+1. Get and install TinyXML2 using your system's package management software, or from https://github.com/leethomason/tinyxml2.
+
 #### ZeroMQ C++ API
-        $ git@github.com:zeromq/zmqpp.git
-        $ mkdir -p builds/zmqpp; cd builds/zmqpp; cmake ../../zmqpp; make; cd -
-        
-For El Capitan users, note: https://github.com/zeromq/zmqpp/issues/164.
+Get and install zmqpp (libzmqpp-dev) using your system's package management software, or from `git@github.com:zeromq/zmqpp.git`. For El Capitan users, note: https://github.com/zeromq/zmqpp/issues/164.
+
+#### DNSSD
+For Ubuntu users, you must install `libavahi-compat-libdnssd-dev` from your system's package management software.
 
 #### OSXGlut
 1. Optionally, you can install OSXGlut from https://github.com/stevenlovegrove/osxglut.
@@ -153,6 +156,7 @@ For El Capitan users, note: https://github.com/zeromq/zmqpp/issues/164.
 #### SceneGraph
         $ git clone git@github.com:arpg/SceneGraph.git
         $ mkdir -p builds/SceneGraph; cd builds/SceneGraph; cmake ../../SceneGraph; make; make install; cd -
+Note: the CarDemo might not compile on all machines.
 
 #### Calibu
         $ git clone git@github.com:arpg/Calibu.git
