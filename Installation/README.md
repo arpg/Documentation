@@ -1,7 +1,7 @@
 # ARPG Software Installation Notes
 
 This guide describes how to install the ARPG software used for calibration and 3D reconstruction. The installation notes consider only a UNIX-based operating system, and makes notes for the most popular (Ubuntu and Mac OS X) throughout. *If running Ubuntu, make sure you are using the latest stable release.* We do not write our software based on beta releases of any dependencies. The guide encompasses:
-* Common dependencies: CUDA, Gflags, Glog, Eigen3, Ceres Solved, Google Protobuf, OpenCV.
+* Common dependencies: CUDA (optional, NVidia graphics cards only), Gflags, Glog, Eigen3, Ceres Solved, Google Protobuf, OpenCV.
 * Common ARPG utilities: Sophus, CVars, Pangolin, SceneGraph.
 * Calibu: Calibration library.
 * Libfreenect2: Open source driver for Kinect2.
@@ -46,8 +46,8 @@ The usual way to build a library or application that supports CMake (contains a 
 
 ### ARPG dependencies
 
-#### CUDA
-CUDA >= 7.0 is required by Kangaroo, and you may also use it for OpenCV.
+#### CUDA (optional)
+CUDA >= 7.0 is required by Kangaroo, and you may also use it for OpenCV. You do not need CUDA unless you are planning to run certain kinds of algorithms (especially 3D reconstruction).
 
 1. Install CUDA for nVidia graphic cards from https://developer.nvidia.com/cuda-downloads?sid=625109.
 2. Get the latest thrust library from https://github.com/thrust/thrust and copy the thrust directory to `/usr/local/cuda/include`.
