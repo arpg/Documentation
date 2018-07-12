@@ -137,7 +137,13 @@ Get and install zmqpp (libzmqpp-dev) using your system's package management soft
 For Ubuntu users, you must install `libavahi-compat-libdnssd-dev` from your system's package management software.
 
 #### OSXGlut
-1. Optionally, you can install OSXGlut from https://github.com/stevenlovegrove/osxglut.
+Optionally, you can install OSXGlut from https://github.com/stevenlovegrove/osxglut.
+
+#### FreeGLUT on OS X
+On OS X, installing FreeGLUT is recommended for Pangolin applications. It is
+available via `homebrew`. If you get the error `GLUT Fatal Error: internal
+error: NSInternalInconsistencyException, reason: nextEventMatchingMask should
+only be called from the Main Thread!`, installing FreeGLUT will fix it.
 
 ## Common ARPG utilities
 
