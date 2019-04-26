@@ -151,7 +151,7 @@ only be called from the Main Thread!`, installing FreeGLUT will fix it.
         $ git clone git@github.com:arpg/Sophus.git
         $ mkdir -p builds/Sophus; cd builds/Sophus; cmake ../../Sophus; make; make install; cd -
 
-#### CVars (GLConsole)
+#### CVars (not required for Compass)
         $ git clone git@github.com:arpg/CVars.git
         $ mkdir -p builds/CVars; cd builds/CVars; cmake ../../CVars; make; make install; cd -
 
@@ -164,15 +164,11 @@ only be called from the Main Thread!`, installing FreeGLUT will fix it.
         $ mkdir -p builds/SceneGraph; cd builds/SceneGraph; cmake ../../SceneGraph; make; make install; cd -
 Note: the CarDemo might not compile on all machines.
 
-#### Calibu
+#### Calibu (not required for Compass)
         $ git clone git@github.com:arpg/Calibu.git
         $ mkdir -p builds/Calibu; cd builds/Calibu; cmake ../../Calibu; make; make install; cd -
 
-#### Node
-        $ git clone https://github.com/arpg/Node
-        $ mkdir -p builds/Node; cd builds/Node; cmake ../../Node; make; make install; cd -
-
-#### libfreenect2
+#### libfreenect2 (not required for Compass)
 Install this library if you require support for Kinect2.
 
 1. Get libfreenect2 from https://github.com/OpenKinect/libfreenect2.
@@ -181,7 +177,7 @@ Install this library if you require support for Kinect2.
 #### HAL
         $ git clone https://github.com/arpg/HAL
         $ mkdir -p builds/HAL; cd builds/HAL; cmake ../../HAL; make; make install; cd -
-##### Gladiator Landmark IMU on MacOS
+##### Gladiator Landmark IMU on MacOS (not required for Compass)
 To support this IMU with the CP2102 dongle, install the Mac CP2102 drivers from:
 https://www.silabs.com/products/mcu/Pages/USBtoUARTBridgeVCPDrivers.aspx
 
@@ -200,7 +196,7 @@ The kernel driver on Mac doesn't close the port properly when an application seg
 2. ccmake and make install normally.
 3. If you compile with Clang and get errors saying that `shared_ptr` does not belong to `std::`, your `libstdc++` implementation is probably old (e.g. version 6.0.9 shipped with GCC 4.2.1) and you should update it. Alternatively, use GCC to build Vicalib.
 
-#### Kangaroo
+#### Kangaroo (not required for Compass)
 
 1. Get Kangaroo from https://github.com/arpg/Kangaroo.
 2. Run ccmake on the Kangaroo source directory and set `BUILD_APPLICATIONS=OFF`.
