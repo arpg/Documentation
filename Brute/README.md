@@ -2,7 +2,23 @@
 
 Brute is our lab GPU powerhouse machine. To reserve time on this machine, use the [google calendar](https://calendar.google.com/calendar/u/1?cid=Y29sb3JhZG8uZWR1X29jbWl0Njhjc21lMDg5dnQ4bW1odTIwN2dzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20).  
 
-No-one has set up a remote desktop client yet, so right now, you can either ssh or visit the lab in person. You need to be in the university VPN to ssh into Brute. Instructions for the VPN are [here](https://oit.colorado.edu/services/network-internet-services/vpn). If you want to install a remote desktop, please do, and add the details to this document. If you want a way to view images and figures without installing a remote desktop, see the [Tips and Tricks](#tips-and-tricks) section.
+## Connecting
+
+You need to be in the university VPN to connect to Brute. Instructions for the VPN are [here](https://oit.colorado.edu/services/network-internet-services/vpn).
+
+### SSH
+
+`ssh` is configured to run with public key authentication only. Make sure you have access to the key pair used to set up your account. If you want a way to view images and figures without using ssh, see the [Tips and Tricks](#tips-and-tricks) section about jupyter notebooks.
+
+### Remote Desktop
+
+Brute runs a Xrdp server. To use, you will need an Xrdp client. For example, Windows provides Microsoft Remote Desktop. If you are using macOS, you can install the Microsoft Remote Desktop application from the App Store. Linux users can use an RDP client such as Remmina or Vinagre.  
+
+Because Brute only uses public key authentication, the remote desktop is configured to work with port forwarding
+
+    ssh -N -f -L 3389:localhost:3389 user@arpg-brute.cs.colorado.edu
+    
+Now use the localhost:3389 as the computer your client should connect to.
 
 ## Hardware
 
