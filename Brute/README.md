@@ -18,6 +18,11 @@ Is the disk full again? Here are some commands to locate large directories and f
 - Interactive file structure browsing of user directories `ncdu \home\`
 - Comprehensive search for large files including docker, excluding media drives `sudo du -h / | grep -v /media | grep ^[0-9]*G`
 
+Frequent offenders are docker images and conda packages
+
+- Purge unused and dangling docker images `docker system prune`
+- Purge unused conda packages `conda clean -a`
+
 ### GPUs
 
 Brute has 2 P6000 GPUs. When reserving use, specify which GPU you are reserving, i.e. 0 or 1.   
