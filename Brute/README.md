@@ -10,6 +10,14 @@ No-one has set up a remote desktop client yet, so right now, you can either ssh 
 
 Brute currently has 500GB SSD for the partition hosting `/home/` which includes all user home directories. As a result, the SSD frequently runs out of space. Therefore, we request that all data and models are stored on the two storage hardrives, `/media/bigdrive/`(2TB) and `/media/giantdrive/`(8TB). All data should also be backed up to another machine or cloud location, as data losses have occurred when users were purged after graduation. 
 
+#### Space Troubleshooting
+
+Is the disk full again? Here are some commands to locate large directories and files.
+
+- Find out which disks are full `du -h`
+- Interactive file structure browsing of user directories `ncdu \home\`
+- Comprehensive search for large files including docker, excluding media drives `sudo du -h / | grep -v /media | grep ^[0-9]*G`
+
 ### GPUs
 
 Brute has 2 P6000 GPUs. When reserving use, specify which GPU you are reserving, i.e. 0 or 1.   
