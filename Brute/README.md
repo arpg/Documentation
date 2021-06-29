@@ -31,7 +31,7 @@ Brute currently has 500GB SSD for the partition hosting `/home/` which includes 
 Is the disk full again? Here are some commands to locate large directories and files.
 
 - Find out which disks are full `df -h`
-- Interactive file structure browsing of user directories `ncdu \home\`
+- Interactive file structure browsing of user directories `ncdu /home/`
 - Comprehensive search for large files including docker, excluding media drives `sudo du -h / | grep -v /media | grep ^[0-9]*G`
 
 Frequent offenders are docker images and conda packages
